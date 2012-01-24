@@ -1,6 +1,11 @@
 This library is presented as a collection of useful tools.
 
-The use of an autoloader is recommended.
+
+The use of the included autoloader is recommended:
+
+    require (".../RRaven/Autoloader.php");
+    new RRaven_Autoloader()
+
 
 Code contributions are welcomed:
 http://github.com/ReactiveRaven/PHPLibrary
