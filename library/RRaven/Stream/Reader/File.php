@@ -39,5 +39,3 @@ class RRaven_Stream_Reader_File extends RRaven_Stream_Reader_Abstract {
 		$this->current = null;
 	}
 }
-
-?>

@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Array
- *
- * @author godfred7
- */
 class RRaven_Stream_Reader_Array extends RRaven_Stream_Reader_Abstract {
 	
 	protected $values = null;
@@ -57,4 +47,3 @@ class RRaven_Stream_Reader_Array extends RRaven_Stream_Reader_Abstract {
 			&& isset($this->values[$this->index]);
 	}
 }
-?>

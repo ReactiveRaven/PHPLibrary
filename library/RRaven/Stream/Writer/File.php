@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of File
- *
- * @author godfred7
- */
 class RRaven_Stream_Writer_File extends RRaven_Stream_Writer_Abstract {
 	
 	protected $handle = null;

@@ -7,5 +7,3 @@ class RRaven_Stream_Transform_String_Lowercase
 		return strtolower(parent::current());
 	}
 }
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 abstract class RRaven_Transform_String_Abstract 
 	extends RRaven_Transform_Abstract {
 

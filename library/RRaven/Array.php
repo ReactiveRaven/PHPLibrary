@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Array
- *
- * @author godfred7
- */
 class RRaven_Array extends ArrayObject {
 	
 	public function __construct($array = array()) {
@@ -92,4 +82,3 @@ class RRaven_Array extends ArrayObject {
 		return $this->getArrayCopy();
 	}
 }
-?>

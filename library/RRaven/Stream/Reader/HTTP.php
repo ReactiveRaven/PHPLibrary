@@ -1,4 +1,5 @@
 <?php
+
 class RRaven_Stream_Reader_HTTP 
 	extends RRaven_Stream_Reader_Abstract 
 {

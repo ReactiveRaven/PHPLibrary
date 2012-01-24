@@ -1,4 +1,5 @@
 <?php
+
 class RRaven_Stream_Transform_Array_Collect 
 	extends RRaven_Stream_Transform_Array_Abstract 
 {

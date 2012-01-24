@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of CSV
- *
- * @author godfred7
- */
 class RRaven_Stream_Reader_CSV extends RRaven_Stream_Reader_File {
 	
 	protected $delimiter = ",";

@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Buffer
- *
- * @author godfred7
- */
 class RRaven_Stream_Writer_Buffer extends RRaven_Stream_Writer_Abstract {
 	
 	protected $writer = null;

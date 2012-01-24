@@ -38,5 +38,3 @@ class RRaven_Stream_Transform_String_Wrap
 		return $this->get_reader()->valid();
 	}
 }
-
-?>

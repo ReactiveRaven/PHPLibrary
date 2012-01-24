@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Abstract
- *
- * @author godfred7
- */
 abstract class RRaven_Stream_Writer_Abstract {
 	
 	/**
@@ -47,4 +37,3 @@ abstract class RRaven_Stream_Writer_Abstract {
 	}
 	
 }
-?>

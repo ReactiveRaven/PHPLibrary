@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of JSON
- *
- * @author godfred7
- */
 class RRaven_Stream_Transform_String_JSON 
 	extends RRaven_Stream_Transform_String_Abstract 
 {
@@ -33,5 +23,3 @@ class RRaven_Stream_Transform_String_JSON
 		return $this->get_reader()->valid();
 	}
 }
-
-?>
