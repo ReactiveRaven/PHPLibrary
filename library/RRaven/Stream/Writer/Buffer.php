@@ -32,14 +32,17 @@ class RRaven_Stream_Writer_Buffer extends RRaven_Stream_Writer_Abstract {
 					"Cannot flush buffer to stream_writer; already closed"
 				);
 			}
+			var_dump($this->buffer);
 			$this->writer->write_many($this->buffer);
 		}
 		$this->buffer = array();
 	}
 	
 	public function close() {
-		$this->flush();
-		$this->closed = true;
-		$this->writer->close();
+		if (!$this->closed) {
+			$this->flush();
+			$this->closed = true;
+			$this->writer->close();
+		}
 	}
 }

@@ -22,7 +22,7 @@ class RRaven_Stream_Reader_HTTP
 	private function fetchBody() {
 		$ch = curl_init($this->url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		return curl_exec($ch);
+		return explode("\n", curl_exec($ch));
 	}
 	
 	public function current() {

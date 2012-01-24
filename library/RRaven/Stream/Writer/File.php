@@ -36,7 +36,9 @@ class RRaven_Stream_Writer_File extends RRaven_Stream_Writer_Abstract {
 	}
 	
 	public function close() {
-		$this->closed = true;
-		fclose($this->handle);
+		if (!$this->closed) {
+			$this->closed = true;
+			fclose($this->handle);
+		}
 	}
 }
