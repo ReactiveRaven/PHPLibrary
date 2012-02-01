@@ -11,7 +11,7 @@ class RRaven_Array_Toolbox {
 	public static function isIterable($array) {
 		return 
 			is_array($array) 
-			|| $array instanceof Iterator;
+			|| $array instanceof Traversable;
 	}
 	
 	/**
