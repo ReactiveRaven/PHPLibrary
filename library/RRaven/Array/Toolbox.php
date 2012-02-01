@@ -39,6 +39,29 @@ class RRaven_Array_Toolbox {
 			is_array($array) 
 			|| $array instanceof ArrayAccess;
 	}
+		
+	/**
+	 * Removes duplicate values from an array.
+	 * Does not act recursively, only compares values directly.
+	 * 
+	 * @param type $array
+	 * @return type
+	 * @throws Exception 
+	 */
+	public static function remove_duplicates($array) {
+		if (!self::isIterable($array)) {
+			throw new Exception("Can't loop over the variable given");
+		}
+		
+		$result = array();
+		foreach ($array as $key => $val) {
+			if (!in_array($val, $result)) {
+				$result[$key] = $val;
+			}
+		}
+		
+		return $result;
+	}
 	
 	/**
 	 * Returns true if a variable is array-like.
