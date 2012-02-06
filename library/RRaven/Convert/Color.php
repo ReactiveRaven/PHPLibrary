@@ -26,10 +26,10 @@ class RRaven_Convert_Color {
 		$h = $s = $l = ($max + $min) / 2;
 	
 
-		if (max == min) {
+		if ($max == $min) {
 			$h = $s = 0; // achromatic
 		} else {
-			$d = max - min;
+			$d = $max - $min;
 			$s = $l > 0.5 ? $d / (2 - $max - $min) : $d / ($max + $min);
 			if ($max == $rgb[0]) {
 				$h = ($g - $b) / $d + ($g < $b ? 6 : 0);
@@ -88,7 +88,7 @@ class RRaven_Convert_Color {
 	{
 		self::check_hex($hex);
 		$hex = trim($hex, "#");
-		$return = chunk_split($hex, 2);
+		$return = str_split($hex, 2);
 		foreach ($return as $key => $val) {
 			$return[$key] = hexdec($val);
 		}

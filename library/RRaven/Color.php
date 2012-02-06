@@ -1,6 +1,6 @@
 <?php
 
-abstract class RRaven_Color {
+class RRaven_Color {
 	
 	protected $_hsl = null;
 	protected $_rgb = null;
@@ -9,7 +9,10 @@ abstract class RRaven_Color {
 	/**
 	 * Protected to require using the 'from' methods
 	**/
-	protected function __construct();
+	protected function __construct()
+	{
+		// do nothing!
+	}
 	
 	/**
 	 * Returns a RRaven_Color object based on the given RGB array
@@ -38,7 +41,7 @@ abstract class RRaven_Color {
 	/**
 	 * Returns a RRaven_Color object based on the given HSL array
 	 *
-	 * @param $hsl float[] hue, saturation, luminence values in ranges 0-360, 0-1, 0-1
+	 * @param $hsl float[] hue, saturation, luminence values in ranges 0-1
 	**/
 	public static function fromHSL($hsl)
 	{
@@ -61,9 +64,19 @@ abstract class RRaven_Color {
 	}
 	
 	/**
+	 * Returns the HSL array of this color.
+	 * 
+	 * @return int[] red, green, blue in range 0-1
+	 */
+	public function getHSL()
+	{
+		return $this->_hsl;
+	}
+	
+	/**
 	 * Returns hue degree for this color
 	 *
-	 * @return int hue in range 0-360
+	 * @return int hue in range 0-1
 	**/
 	public function getHue()
 	{
