@@ -103,7 +103,9 @@ class RRaven_Render_Exception {
 			. $type . $function . "(" 
 			. implode(", ", $this->renderArguments($args, $function, $class)) 
 			. ")</dt>";
-		$returns[] = "<dd title=\"" . implode("\n", $this->pullSnippet($file, $line)) . "\">" . $file . ":" . $line . "</dd>";
+		$returns[] = 
+			"<dd title=\"" . implode("\n", $this->pullSnippet($file, $line)) 
+			. "\">" . $file . ":" . $line . "</dd>";
 		$returns[] = "</dl>";
 		return $returns;
 	}
@@ -120,7 +122,13 @@ class RRaven_Render_Exception {
 					$returns[] = "";
 					$returns[] = "";
 				}
-				$returns[] = $i . " " . str_replace(array("\n", "\t"), array("", "  "), $this->htmlEscape($string));
+				$returns[] = 
+					$i . " " 
+					. str_replace(
+						array("\n", "\t"), 
+						array("", "  "), 
+						$this->htmlEscape($string)
+					);
 				if ($i == $line) {
 					$returns[] = "";
 					$returns[] = "";
