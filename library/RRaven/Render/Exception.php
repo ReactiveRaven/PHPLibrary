@@ -17,18 +17,35 @@ class RRaven_Render_Exception {
 	
 	/* @var $exception Exception */
 	protected $exception = null;
+	
+	protected static $defaultOptions = array(
+		"height" => 7
+	);
+	
 	protected $options = null;
 	protected $colours = null;
 	protected $knownClasses = null;
 	
+	/**
+	 * Construct a new Exception rendererer
+	 * 
+	 * @param Exception $e
+	 * @param array $options 
+	 */
 	public function __construct(Exception $e, $options = array()) {
 		$this->exception = $e;
-		$this->options = $options;
+		$this->options = array_merge(self::$defaultOptions, $options);
 		$this->colours = self::$defaultColours;
 		$this->knownClasses = array();
 	}
 	
-	public function renderException(Exception $exception)
+	/**
+	 * Render an exception out to string.
+	 *
+	 * @param Exception $exception
+	 * @return string 
+	 */
+	public static function renderException(Exception $exception)
 	{
 		$returns = array();
 		$returns[] = 
@@ -37,7 +54,7 @@ class RRaven_Render_Exception {
 		$returns[] = 
 			"<p title=\"" . implode(
 				"\n", 
-				$this->pullSnippet(
+				self::pullSnippet(
 					$exception->getFile(), 
 					$exception->getLine()
 				)
@@ -46,7 +63,7 @@ class RRaven_Render_Exception {
 		$returns[] = "<ul>";
 		foreach ($exception->getTrace() as $traceLine) {
 			$returns[] = "<li>";
-			foreach ($this->renderTraceLine($traceLine) as $htmlLine) {
+			foreach (self::renderTraceLine($traceLine) as $htmlLine) {
 				$returns[] = $htmlLine;
 			}
 			$returns[] = "</li>";
@@ -56,6 +73,12 @@ class RRaven_Render_Exception {
 		return $returns;
 	}
 	
+	/**
+	 * Renders a single line from a trace.
+	 *
+	 * @param array $traceLine
+	 * @return string
+	 */
 	private function renderTraceLine($traceLine) {
 		$returns = array();
 		
@@ -88,6 +111,17 @@ class RRaven_Render_Exception {
 		return $returns;
 	}
 	
+	/**
+	 * Renders a call to string.
+	 * 
+	 * @param string $file
+	 * @param int $line
+	 * @param array $args
+	 * @param string $function
+	 * @param string $type
+	 * @param string $class
+	 * @return string
+	 */
 	private function renderCall(
 		$file, 
 		$line, 
@@ -110,7 +144,27 @@ class RRaven_Render_Exception {
 		return $returns;
 	}
 	
-	private function pullSnippet($file, $line, $height = 7) {
+	/**
+	 * Pulls a snippet of code for context around a specific line in a file.
+	 * 
+	 * @param string $file
+	 * @param int $line
+	 * @param int $height
+	 * @return string 
+	 */
+	private function pullSnippet($file, $line, $height = null) {
+		
+		$height = 
+			(
+				$height !== null 
+					? $height 
+					: (
+						!isset($this->options["height"])
+							? 7 
+							: $this->options["height"]
+					)
+			);
+		
 		$handle = fopen($file, "r");
 		$minLine = $line < $height ? 0 : $line - $height;
 		$maxLine = $line + $height;
@@ -138,16 +192,36 @@ class RRaven_Render_Exception {
 		return $returns;
 	}
 	
+	/**
+	 * Escape string in a standardised way
+	 * 
+	 * @param string $string
+	 * @return string
+	 */
 	private function htmlEscape($string) {
 		return htmlspecialchars($string, ENT_QUOTES);
 	}
 	
+	/**
+	 * Converts a class name to a HTML string
+	 * 
+	 * @param string $class
+	 * @return string
+	 */
 	private function renderClassName($class) {
 		return 
 			"<span style=\"background: " . $this->getClassColour($class) 
 			. "; color: white; padding: 0.1em;\">" . $class . "</span>";
 	}
 	
+	/**
+	 * Renders all arguments as a HTML string, with argument names if available.
+	 * 
+	 * @param array $args
+	 * @param string $function
+	 * @param string $class
+	 * @return array|\RRaven_Render_Parameter 
+	 */
 	private function renderArguments($args, $function, $class = null) {
 		$returns = array();
 		if ($args == null) {
@@ -155,7 +229,7 @@ class RRaven_Render_Exception {
 		}
 		if ($class == null && !function_exists($function)) {
 			foreach ($args as $val) {
-				$returns[] = $this->stringify($val);
+				$returns[] = new RRaven_Render_Parameter($val);
 			}
 			return $returns;
 		}
@@ -170,44 +244,24 @@ class RRaven_Render_Exception {
 		
 		if (count($params) == 0) {
 			foreach ($args as $val) {
-				$returns[] = $this->stringify($val);
+				$returns[] = new RRaven_Render_Parameter($val);
 			}
 			return $returns;
 		}
 		
 		foreach ($args as $index => $val) {
 			$returns[] = 
-				"<span style=\"color: grey;\">" . $params[$index]->getName() 
-				. " </span>" . $this->stringify($val);
+				new RRaven_Render_Parameter($val, $params[$index]->getName());
 		}
 		return $returns;
 	}
 	
-	private function stringify($variable) {
-		if (is_null($variable)) {
-			return "NULL";
-		} else if ($variable === false) {
-			return "FALSE";
-		} else if ($variable === true) {
-			return "TRUE";
-		} else if (is_array($variable)) {
-			$array = array();
-			foreach ($variable as $val) {
-				$array[] = $this->stringify($val);
-			}
-			return "[" . implode(", ", $array) . "]";
-		} else if (empty($variable)) {
-			return "\"\"";
-		} else if (is_object($variable)) {
-			return 
-				"<span title=\"" 
-				. htmlentities(serialize($variable), ENT_QUOTES) . "\">" 
-				. get_class($variable) . "</span>";
-		} else {
-			return "\"" . $this->htmlEscape($variable, ENT_QUOTES) . "\"";
-		}
-	}
-	
+	/**
+	 * Returns a hex colour to associate with a class
+	 * 
+	 * @param string $className
+	 * @return string
+	 */
 	private function getClassColour($className) {
 		if (!in_array($className, $this->knownClasses)) {
 			$this->knownClasses[] = $className;
@@ -219,7 +273,11 @@ class RRaven_Render_Exception {
 			);
 	}
 
-
+	/**
+	 * Converts the object to a HTML string.
+	 * 
+	 * @return string
+	 */
 	public function __toString() {
 		return implode("\n", $this->renderException($this->exception));
 	}
