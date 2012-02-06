@@ -15,7 +15,7 @@ An object-oriented array, exposing common array manipulation functions in a sens
 
 Note that `RRaven_Array` uses boolean method names for clarity, eg: "and not" rather than "array_diff".
 
-#RRaven\_Convert\_Color
+#RRaven\_Color
 A colour object for converting between RGB, HSL and Hex colour formats.
 
 #RRaven\_Stream\_
