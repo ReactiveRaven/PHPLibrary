@@ -152,4 +152,37 @@ class RRaven_Color {
 			);
 	}
 	
+	/**
+	 * 
+	**/
+	public function setHue($newHue)
+	{
+		if ($newHue > 1 || $newHue < 0) {
+			throw new InvalidArgumentException("Hue must be a float between 0 and 1");
+		}
+		$this->_hsl[0] = $newHue;
+		$this->_rgb = null;
+		$this->_hex = null;
+	}
+	
+	public function setSaturation($newSaturation)
+	{
+		if ($newSaturation > 1 || $newSaturation < 0) {
+			throw new InvalidArgumentException("Saturation must be a float between 0 and 1");
+		}
+		$this->_hsl[1] = $newSaturation;
+		$this->_rgb = null;
+		$this->_hex = null;
+	}
+	
+	public function setLightness($newLightness)
+	{
+		if ($newLightness > 1 || $newLightness < 0) {
+			throw new InvalidArgumentException("Lightness must be a float between 0 and 1");
+		}
+		$this->_hsl[2] = $newLightness;
+		$this->_rgb = null;
+		$this->_hex = null;
+	}
+	
 }
