@@ -209,4 +209,73 @@ class RRaven_Color {
 		return $this;
 	}
 	
+	/**
+	 * Sets the red component of the colour.
+	 * Expected as an integer between 0 and 255
+	 *
+	 * @param $red
+	 * @return RRaven_Color $this
+	**/
+	public function setRed($red) {
+		
+		if (!is_int($red) || $red < 0 || $red > 255)
+		{
+			throw new InvalidArgumentException("Red component must be an integer between 0 and 255");
+		}
+		
+		$rgb = $this->getRGB();
+		$rgb[0] = $red;
+		
+		$this->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$this->_rgb =$rgb;
+		$this->_hex = null;
+		
+		return $this;
+	}
+	
+	/**
+	 * Sets the green component of the colour.
+	 * Expected as an integer between 0 and 255
+	 *
+	 * @param $green
+	 * @return RRaven_Color $this
+	**/
+	public function setGreen($green) {
+		if (!is_int($green) || $green < 0 || $green > 255)
+		{
+			throw new InvalidArgumentException("Green component must be an integer between 0 and 255");
+		}
+		
+		$rgb = $this->getRGB();
+		$rgb[1] = $green;
+		
+		$this->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$this->_rgb = $rgb;
+		$this->_hex = null;
+		
+		return $this;
+	}
+	
+	/**
+	 * Sets the blue component of the colour.
+	 * Expected as an integer between 0 and 255
+	 *
+	 * @param $blue
+	 * @return RRaven_Color $this
+	**/
+	public function setBlue($blue) {
+		if (!is_int($blue) || $blue < 0 || $blue > 255)
+		{
+			throw new InvalidArgumentException("Blue component must be an integer between 0 and 255");
+		}
+		
+		$rgb = $this->getRGB();
+		$rgb[2] = $blue;
+		
+		$this->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$this->_rgb = $rgb;
+		$this->_hex = null;
+		
+		return $this;
+	}
 }
