@@ -153,7 +153,11 @@ class RRaven_Color {
 	}
 	
 	/**
-	 * 
+	 * Sets the hue of the colour.
+	 * The hue is expected as a float between 0 and 1.
+	 *
+	 * @param $newHue float
+	 * @return RRaven_Color $this
 	**/
 	public function setHue($newHue)
 	{
@@ -163,8 +167,17 @@ class RRaven_Color {
 		$this->_hsl[0] = $newHue;
 		$this->_rgb = null;
 		$this->_hex = null;
+		
+		return $this;
 	}
 	
+	/**
+	 * Sets the saturation of the colour.
+	 * The saturation is expected as a float between 0 and 1.
+	 *
+	 * @param $newSaturation
+	 * @return RRaven_Color $this
+	**/
 	public function setSaturation($newSaturation)
 	{
 		if ($newSaturation > 1 || $newSaturation < 0) {
@@ -173,8 +186,17 @@ class RRaven_Color {
 		$this->_hsl[1] = $newSaturation;
 		$this->_rgb = null;
 		$this->_hex = null;
+		
+		return $this;
 	}
 	
+	/**
+	 * Sets the lightness/brightness of the colour.
+	 * The lightness is expected as a float between 0 and 1.
+	 *
+	 * @param $newLightness
+	 * @return RRaven_Color $this
+	**/
 	public function setLightness($newLightness)
 	{
 		if ($newLightness > 1 || $newLightness < 0) {
@@ -183,6 +205,8 @@ class RRaven_Color {
 		$this->_hsl[2] = $newLightness;
 		$this->_rgb = null;
 		$this->_hex = null;
+		
+		return $this;
 	}
 	
 }
