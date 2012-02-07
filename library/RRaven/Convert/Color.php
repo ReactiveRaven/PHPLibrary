@@ -14,7 +14,7 @@ class RRaven_Convert_Color {
 	
 	static function rgb_to_hsl($rgb)
 	{
-		foreach ($rgb as $key => $val) {
+		foreach (array_keys($rgb) as $key) {
 			$rgb[$key] /= 255;
 		}
 		$max = max($rgb);
