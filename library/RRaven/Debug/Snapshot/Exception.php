@@ -21,6 +21,16 @@ class RRaven_Debug_Snapshot_Exception
 			);
 	}
 	
+	public function getException()
+	{
+		return $this->exception;
+	}
+	
+	public function getEnvironment()
+	{
+		return $this->environment;
+	}
+	
 	public function toArray()
 	{
 		return 
@@ -32,7 +42,6 @@ class RRaven_Debug_Snapshot_Exception
 						"file" => $this->exception->getFile(),
 						"line" => $this->exception->getLine(),
 						"message" => $this->exception->getMessage(),
-						"previous" => $this->exception->getPrevious(),
 						"trace" => $this->exception->getTrace()
 					)
 				),
