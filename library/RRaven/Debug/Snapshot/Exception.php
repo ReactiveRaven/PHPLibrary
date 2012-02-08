@@ -7,10 +7,18 @@ class RRaven_Debug_Snapshot_Exception
 	
 	const VERSION = 1;
 	
-	public function __construct(Exception $exception)
+	public function __construct(
+		Exception $exception, 
+		RRaven_Debug_Snapshot_Environment $environment = null
+	)
 	{
 		$this->exception = $exception;
-		$this->environment = new RRaven_Debug_Snapshot_Environment();
+		$this->environment = 
+			(
+				$environment !== null 
+					? $environment 
+					: new RRaven_Debug_Snapshot_Environment()
+			);
 	}
 	
 	public function toArray()
