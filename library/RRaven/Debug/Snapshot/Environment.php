@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Environment
- *
- * @author david
- */
 class RRaven_Debug_Snapshot_Environment
 {
 	protected $data = array();
@@ -82,5 +72,3 @@ class RRaven_Debug_Snapshot_Environment
 		return array("environment" => $this->data);
 	}
 }
-
-?>

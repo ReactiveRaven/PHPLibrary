@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of ExceptionHandler
- *
- * @author david
- */
 class RRaven_Debug_Snapshot_Exception_Handler
 {
 	protected $previousHandler = null;
@@ -56,5 +46,3 @@ class RRaven_Debug_Snapshot_Exception_Handler
 	
 	
 }
-
-?>
