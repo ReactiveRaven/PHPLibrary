@@ -5,7 +5,9 @@ class RRaven_Debug_Snapshot_Exception_Listener_Forwarder
 {
 	protected $url = null;
 	
-	public function __construct($url = "http://api.dmgodfrey.co.uk/snapshot/exception")
+	public function __construct(
+		$url = "http://api.dmgodfrey.co.uk/snapshot/exception"
+	)
 	{
 		$this->url = $url;
 	}
