@@ -1,17 +1,13 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of Color
- *
- * @author godfred7
- */
 class RRaven_Convert_Color {
 	
+	/**
+	 * Converts an array of RGB values to an array of HSL values
+	 *
+	 * @param int[] $rgb red, green, blue values in range 0-255
+	 * @return float[] hue, saturation, lightness values in range 0-1
+	**/
 	static function rgb_to_hsl($rgb)
 	{
 		foreach (array_keys($rgb) as $key) {
@@ -43,7 +39,7 @@ class RRaven_Convert_Color {
 
 		return array($h, $s, $l);
 	}
-	
+
 	private static function hue_to_rgb($p, $q, $t)
 	{
 		if($t < 0) $t += 1;
@@ -54,6 +50,12 @@ class RRaven_Convert_Color {
 		return $p;
 	}
 	
+	/**
+	 * Converts an array of HSL values to an array of RGB values
+	 *
+	 * @param float[] $hsl hue, saturation, lightness in range 0-1
+	 * @return int[] red, green, blue in range 0-255
+	**/
 	static function hsl_to_rgb($hsl) {
 		$h = $hsl[0];
 		$s = $hsl[1];
@@ -76,14 +78,32 @@ class RRaven_Convert_Color {
 		return array($r * 255, $g * 255, $b * 255);
 	}
 	
+	/**
+	 * Converts an array of HSL values to a string Hex value.
+	 *
+	 * @param float[] $hsl hue, saturation, lightness in range 0-1
+	 * @param string hex representation of colour
+	**/
 	static function hsl_to_hex($hsl) {
 		return self::rgb_to_hex(self::hsl_to_rgb($hsl));
 	}
 	
+	/**
+	 * Converts an array of RGB values to a string Hex value.
+	 *
+	 * @param int[] $rgb red, green, blue values in range 0-255
+	 * @return string hex representation of colour
+	**/
 	static function rgb_to_hex($rgb) {
 		return "#" . dechex($rgb[0]) . dechex($rgb[1]) . dechex($rgb[2]);
 	}
 	
+	/**
+	 * Converts a hex string to an array of RGB values.
+	 *
+	 * @param string $hex representation of colour
+	 * @return int[] red, green, blue values in range 0-255
+	**/
 	static function hex_to_rgb($hex)
 	{
 		self::check_hex($hex);
@@ -95,11 +115,23 @@ class RRaven_Convert_Color {
 		return $return;
 	}
 	
+	/**
+	 * Determines if the given hex string is a valid colour
+	 *
+	 * @param string $hex representation of colour
+	 * @return boolean true if valid
+	**/
 	static function is_valid_hex($hex) 
 	{
 		return preg_match("/^[#]?[0-9abcdef]{6}$/i", $hex);
 	}
 	
+	/**
+	 * Determines if the given RGB array is a valid colour
+	 *
+	 * @param int[] $rgb red, green, blue values in range 0-255
+	 * @return boolean true if valid
+	**/
 	static function is_valid_rgb($rgb) 
 	{
 		foreach ($rgb as $val) {
@@ -111,6 +143,12 @@ class RRaven_Convert_Color {
 		return true;
 	}
 	
+	/**
+	 * Throws exception if a hex value is not a valid colour
+	 *
+	 * @param string $hex representation of colour
+	 * @throws InvalidArgumentException
+	**/
 	static protected function check_hex($hex) 
 	{
 		if (!self::is_valid_hex($hex)) {
@@ -118,17 +156,27 @@ class RRaven_Convert_Color {
 		}
 	}
 	
+	/**
+	 * Throws exception if a RGB array is not a valid colour.
+	 *
+	 * @param int[] $rgb red, green, blue values in range 0-255
+	 * @throws InvalidArgumentException
+	**/
 	static protected function check_rgb($rgb) {
 		if (!self::is_valid_rgb($rgb)) {
 			throw new InvalidArgumentException("Not a valid rgb color value");
 		}
 	}
 	
+	/**
+	 * Converts a Hex colour to a HSL array
+	 *
+	 * @param string $hex representation of colour
+	 * @return float[] hue, saturation, lightness values in range 0-1
+	**/
 	static function hex_to_hsl($hex) 
 	{
 		self::check_hex($hex);
 		return self::rgb_to_hsl(self::hex_to_rgb($hex));
 	}
 }
-
-?>
