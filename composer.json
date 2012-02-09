@@ -1,0 +1,22 @@
+{
+	"name": "ReactiveRaven/PHPLibrary",
+	"type": "library",
+	"description": "Utility library",
+	"homepage": "http://github.com/ReactiveRaven/PHPLibrary",
+	"license": "WTFPL",
+	"authors": [
+		{
+			"name": "David Godfrey",
+			"email": "davidmatthewgodfrey@gmail.com",
+			"homepage": "http://dmgodfrey.co.uk"
+		}
+	],
+	"require": {
+		"php": ">=5.2.4"
+	},
+	"autoload": {
+		"psr-0": {
+			"RRaven": "library/"
+		}
+	}
+}
