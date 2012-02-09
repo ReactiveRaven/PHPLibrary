@@ -2,6 +2,7 @@
 	"name": "ReactiveRaven/PHPLibrary",
 	"type": "library",
 	"description": "Utility library",
+	"keywords": ["utility", "library"],
 	"homepage": "http://github.com/ReactiveRaven/PHPLibrary",
 	"license": "WTFPL",
 	"authors": [
