@@ -1,18 +1,20 @@
 <?php
 
-class RRaven_Stream_Reader_Array extends RRaven_Stream_Reader_Abstract {
+namespace RRaven\Stream;
+
+class Reader_Array extends Reader_Abstract {
 	
 	protected $values = null;
 	protected $keys = null;
 	protected $index = 0;
 	
 	public function __construct($array) {
-		if (!is_array($array) && !$array instanceof Traversable)
+		if (!is_array($array) && !$array instanceof \Traversable)
 		{
-			throw new Exception("Cannot loop over given variable");
+			throw new \Exception("Cannot loop over given variable");
 		}
 		
-		if ($array instanceof Traversable) {
+		if ($array instanceof \Traversable) {
 			$arr = array();
 			foreach ($array as $key => $val) {
 				$arr[$key] = $val;

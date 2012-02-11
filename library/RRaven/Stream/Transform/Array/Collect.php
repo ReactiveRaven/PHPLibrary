@@ -1,15 +1,19 @@
 <?php
 
-class RRaven_Stream_Transform_Array_Collect 
-	extends RRaven_Stream_Transform_Array_Abstract 
+namespace RRaven\Stream\Transform;
+
+use RRaven\Stream\Reader_Abstract;
+
+class Array_Collect 
+	extends Array_Abstract 
 {
 	protected $key = null;
 	
-	public function __construct(RRaven_Stream_Reader_Abstract $reader, $key = null) {
+	public function __construct(Reader_Abstract $reader, $key = null) {
 		parent::__construct($reader);
 		
 		if (!is_string($key . "")) {
-			throw new Exception("Key to collect from stream is required");
+			throw new \Exception("Key to collect from stream is required");
 		}
 		
 		$this->key = $key;

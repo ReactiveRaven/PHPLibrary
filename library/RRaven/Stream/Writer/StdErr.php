@@ -1,6 +1,10 @@
 <?php
 
-class RRaven_Stream_Writer_StdErr extends RRaven_Stream_Writer_Abstract
+namespace RRaven\Stream\Writer;
+
+use RRaven\Stream\Writer_Abstract;
+
+class StdErr extends Writer_Abstract
 {
 	protected $handle = null;
 	protected $closed = false;

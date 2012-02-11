@@ -1,10 +1,14 @@
 <?php
 
-abstract class RRaven_Stream_Transform_Abstract extends RRaven_Stream_Reader_Abstract {
+namespace RRaven\Stream;
+
+use RRaven\Stream\Reader_Abstract;
+
+abstract class Transform_Abstract extends Reader_Abstract {
 	
 	protected $reader = null;
 	
-	public function __construct(RRaven_Stream_Reader_Abstract $reader) {
+	public function __construct(Reader_Abstract $reader) {
 		$this->reader = $reader;
 	}
 	

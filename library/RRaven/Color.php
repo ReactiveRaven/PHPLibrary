@@ -1,6 +1,10 @@
 <?php
 
-class RRaven_Color {
+namespace RRaven;
+
+use \RRaven\Convert\Color as Converter;
+
+class Color {
 	
 	protected $_hsl = null;
 	protected $_rgb = null;
@@ -21,8 +25,8 @@ class RRaven_Color {
 	**/
 	public static function fromRGB($rgb)
 	{
-		$color = new RRaven_Color();
-		$color->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$color = new Color();
+		$color->_hsl = Converter::rgb_to_hsl($rgb);
 		return $color;
 	}
 	
@@ -33,8 +37,8 @@ class RRaven_Color {
 	**/
 	public static function fromHex($hex)
 	{
-		$color = new RRaven_Color();
-		$color->_hsl = RRaven_Convert_Color::hex_to_hsl($hex);
+		$color = new Color();
+		$color->_hsl = Converter::hex_to_hsl($hex);
 		return $color;
 	}
 	
@@ -45,7 +49,7 @@ class RRaven_Color {
 	**/
 	public static function fromHSL($hsl)
 	{
-		$color = new RRaven_Color();
+		$color = new Color();
 		$color->_hsl = $hsl;
 		return $color;
 	}
@@ -60,7 +64,7 @@ class RRaven_Color {
 		if (is_array($this->_rgb)) {
 			return $this->_rgb;
 		}
-		return $this->_rgb = RRaven_Convert_Color::hsl_to_rgb($this->_hsl);
+		return $this->_rgb = Converter::hsl_to_rgb($this->_hsl);
 	}
 	
 	/**
@@ -148,7 +152,7 @@ class RRaven_Color {
 				$this->_hex !== null
 					? $this->_hex
 					: $this->_hex = 
-						RRaven_Convert_Color::rgb_to_hex($this->getRGB())
+						Converter::rgb_to_hex($this->getRGB())
 			);
 	}
 	
@@ -162,7 +166,7 @@ class RRaven_Color {
 	public function setHue($newHue)
 	{
 		if ($newHue > 1 || $newHue < 0) {
-			throw new InvalidArgumentException("Hue must be a float between 0 and 1");
+			throw new \InvalidArgumentException("Hue must be a float between 0 and 1");
 		}
 		$this->_hsl[0] = $newHue;
 		$this->_rgb = null;
@@ -181,7 +185,7 @@ class RRaven_Color {
 	public function setSaturation($newSaturation)
 	{
 		if ($newSaturation > 1 || $newSaturation < 0) {
-			throw new InvalidArgumentException("Saturation must be a float between 0 and 1");
+			throw new \InvalidArgumentException("Saturation must be a float between 0 and 1");
 		}
 		$this->_hsl[1] = $newSaturation;
 		$this->_rgb = null;
@@ -200,7 +204,7 @@ class RRaven_Color {
 	public function setLightness($newLightness)
 	{
 		if ($newLightness > 1 || $newLightness < 0) {
-			throw new InvalidArgumentException("Lightness must be a float between 0 and 1");
+			throw new \InvalidArgumentException("Lightness must be a float between 0 and 1");
 		}
 		$this->_hsl[2] = $newLightness;
 		$this->_rgb = null;
@@ -220,13 +224,13 @@ class RRaven_Color {
 		
 		if (!is_int($red) || $red < 0 || $red > 255)
 		{
-			throw new InvalidArgumentException("Red component must be an integer between 0 and 255");
+			throw new \InvalidArgumentException("Red component must be an integer between 0 and 255");
 		}
 		
 		$rgb = $this->getRGB();
 		$rgb[0] = $red;
 		
-		$this->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$this->_hsl = Converter::rgb_to_hsl($rgb);
 		$this->_rgb =$rgb;
 		$this->_hex = null;
 		
@@ -243,13 +247,13 @@ class RRaven_Color {
 	public function setGreen($green) {
 		if (!is_int($green) || $green < 0 || $green > 255)
 		{
-			throw new InvalidArgumentException("Green component must be an integer between 0 and 255");
+			throw new \InvalidArgumentException("Green component must be an integer between 0 and 255");
 		}
 		
 		$rgb = $this->getRGB();
 		$rgb[1] = $green;
 		
-		$this->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$this->_hsl = Converter::rgb_to_hsl($rgb);
 		$this->_rgb = $rgb;
 		$this->_hex = null;
 		
@@ -266,13 +270,13 @@ class RRaven_Color {
 	public function setBlue($blue) {
 		if (!is_int($blue) || $blue < 0 || $blue > 255)
 		{
-			throw new InvalidArgumentException("Blue component must be an integer between 0 and 255");
+			throw new \InvalidArgumentException("Blue component must be an integer between 0 and 255");
 		}
 		
 		$rgb = $this->getRGB();
 		$rgb[2] = $blue;
 		
-		$this->_hsl = RRaven_Convert_Color::rgb_to_hsl($rgb);
+		$this->_hsl = Converter::rgb_to_hsl($rgb);
 		$this->_rgb = $rgb;
 		$this->_hex = null;
 		

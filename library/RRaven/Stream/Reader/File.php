@@ -1,6 +1,10 @@
 <?php
 
-class RRaven_Stream_Reader_File extends RRaven_Stream_Reader_Abstract {
+namespace RRaven\Stream\Reader;
+
+use RRaven\Stream\Reader_Abstract;
+
+class File extends Reader_Abstract {
 	
 	protected $handle = null;
 	protected $current = null;
@@ -8,14 +12,14 @@ class RRaven_Stream_Reader_File extends RRaven_Stream_Reader_Abstract {
 	
 	public function __construct($filename) {
 		if (!is_readable($filename)) {
-			throw new Exception("Cannot read file");
+			throw new \Exception("Cannot read file");
 		}
 		$this->handle = fopen($filename, "r");
 	}
 	
 	public function next() {
-		$index += 1;
-		$current = null;
+		$this->index += 1;
+		$this->current = null;
 	}
 	
 	public function current() {

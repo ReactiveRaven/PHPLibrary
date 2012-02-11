@@ -1,6 +1,8 @@
 <?php
 
-class RRaven_Debug_Snapshot_Exception
+namespace RRaven\Debug\Snapshot;
+
+class Exception
 {
 	protected $exception = null;
 	protected $environment = null;
@@ -8,8 +10,8 @@ class RRaven_Debug_Snapshot_Exception
 	const VERSION = 1;
 	
 	public function __construct(
-		Exception $exception, 
-		RRaven_Debug_Snapshot_Environment $environment = null
+		\Exception $exception, 
+		Environment $environment = null
 	)
 	{
 		$this->exception = $exception;
@@ -17,7 +19,7 @@ class RRaven_Debug_Snapshot_Exception
 			(
 				$environment !== null 
 					? $environment 
-					: new RRaven_Debug_Snapshot_Environment()
+					: new Environment()
 			);
 	}
 	

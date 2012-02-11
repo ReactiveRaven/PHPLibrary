@@ -1,7 +1,11 @@
 <?php
 
-abstract class RRaven_Transform_String_Abstract 
-	extends RRaven_Transform_Abstract {
+namespace RRaven\Transform;
+
+use RRaven\Transform_Abstract;
+
+abstract class String_Abstract 
+	extends Transform_Abstract {
 
 	public function will_accept($input) {
 		return (

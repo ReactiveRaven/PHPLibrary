@@ -1,6 +1,8 @@
 <?php
 
-class RRaven_Debug_Snapshot_Environment
+namespace RRaven\Debug\Snapshot;
+
+class Environment
 {
 	protected $data = array();
 	

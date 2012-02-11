@@ -1,6 +1,8 @@
 <?php
 
-class RRaven_Render_Exception {
+namespace RRaven\Render;
+
+class Exception {
 	
 	private static $defaultColours = 
 		array(
@@ -15,7 +17,7 @@ class RRaven_Render_Exception {
 			"#505050", // grey
 		);
 	
-	/* @var $exception Exception */
+	/* @var $exception \Exception */
 	protected $exception = null;
 	
 	protected static $defaultOptions = array(
@@ -29,10 +31,10 @@ class RRaven_Render_Exception {
 	/**
 	 * Construct a new Exception rendererer
 	 * 
-	 * @param Exception $e
+	 * @param \Exception $e
 	 * @param array $options 
 	 */
-	public function __construct(Exception $e, $options = array()) {
+	public function __construct(\Exception $e, $options = array()) {
 		$this->exception = $e;
 		$this->options = array_merge(self::$defaultOptions, $options);
 		$this->colours = self::$defaultColours;
@@ -42,10 +44,10 @@ class RRaven_Render_Exception {
 	/**
 	 * Render an exception out to string.
 	 *
-	 * @param Exception $exception
+	 * @param \Exception $exception
 	 * @return string 
 	 */
-	public static function renderException(Exception $exception)
+	public static function renderException(\Exception $exception)
 	{
 		$returns = array();
 		$returns[] = 
@@ -199,7 +201,7 @@ class RRaven_Render_Exception {
 	 * @return string
 	 */
 	private function htmlEscape($string) {
-		return htmlspecialchars($string, ENT_QUOTES);
+		return htmlspecialchars($string, \ENT_QUOTES);
 	}
 	
 	/**
@@ -229,29 +231,29 @@ class RRaven_Render_Exception {
 		}
 		if ($class == null && !function_exists($function)) {
 			foreach ($args as $val) {
-				$returns[] = new RRaven_Render_Parameter($val);
+				$returns[] = new Parameter($val);
 			}
 			return $returns;
 		}
 		
 		$reflection = (
 			$class == null 
-				? new ReflectionFunction($function) 
-				: new ReflectionMethod($class, $function)
+				? new \ReflectionFunction($function) 
+				: new \ReflectionMethod($class, $function)
 		);
 		/* @var $reflection ReflectionFunction */
 		$params = $reflection->getParameters();
 		
 		if (count($params) == 0) {
 			foreach ($args as $val) {
-				$returns[] = new RRaven_Render_Parameter($val);
+				$returns[] = new Parameter($val);
 			}
 			return $returns;
 		}
 		
 		foreach ($args as $index => $val) {
 			$returns[] = 
-				new RRaven_Render_Parameter($val, $params[$index]->getName());
+				new Parameter($val, $params[$index]->getName());
 		}
 		return $returns;
 	}

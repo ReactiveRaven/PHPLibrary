@@ -1,6 +1,8 @@
 <?php
 
-class RRaven_Convert_Color {
+namespace RRaven\Convert;
+
+class Color {
 	
 	/**
 	 * Converts an array of RGB values to an array of HSL values
@@ -152,7 +154,7 @@ class RRaven_Convert_Color {
 	static protected function check_hex($hex) 
 	{
 		if (!self::is_valid_hex($hex)) {
-			throw new InvalidArgumentException("Not a valid hex color value");
+			throw new \InvalidArgumentException("Not a valid hex color value");
 		}
 	}
 	
@@ -164,7 +166,7 @@ class RRaven_Convert_Color {
 	**/
 	static protected function check_rgb($rgb) {
 		if (!self::is_valid_rgb($rgb)) {
-			throw new InvalidArgumentException("Not a valid rgb color value");
+			throw new \InvalidArgumentException("Not a valid rgb color value");
 		}
 	}
 	

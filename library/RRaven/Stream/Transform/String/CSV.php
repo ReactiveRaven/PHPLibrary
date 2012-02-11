@@ -1,25 +1,31 @@
 <?php
 
-class RRaven_Stream_Transform_String_CSV 
-	extends RRaven_Stream_Transform_String_Abstract 
+namespace RRaven\Stream\Transform\String;
+
+use RRaven\Stream\Transform\String_Abstract;
+use RRaven\Stream\Reader_Abstract;
+use RRaven\Transform\String_Abstract;
+
+class CSV 
+	extends String_Abstract 
 {
 	protected $transformer = null;
 	
 	protected $keys = null;
 	protected $index = 0;
 	
-	public function __construct(RRaven_Stream_Reader_Abstract $reader) {
+	public function __construct(Reader_Abstract $reader) {
 		parent::__construct($reader);
 	}
 	
 	/**
 	 *
-	 * @return RRaven_Transform_String_Abstract
+	 * @return \RRaven\Transform\String_Abstract
 	 */
 	protected function get_transformer() {
 		return (
 			$this->transformer === null 
-				? $this->transformer = new RRaven_Transform_String_CSV() 
+				? $this->transformer = new \RRaven\Transform\String\CSV() 
 				: $this->transformer
 		);
 	}
@@ -27,7 +33,7 @@ class RRaven_Stream_Transform_String_CSV
 	protected function get_keys() {
 		if ($this->keys === null) {
 			if (!$this->getReader()->valid()) {
-				throw new Exception("Cannot read keys from stream");
+				throw new \Exception("Cannot read keys from stream");
 			}
 			$this->keys = 
 					$this->get_transformer()

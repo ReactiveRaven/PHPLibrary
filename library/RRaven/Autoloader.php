@@ -25,12 +25,24 @@ class RRaven_Autoloader {
 	}
 	
 	public function load($classname) {
+		
+		$classname = ltrim(ltrim($classname, '\\'), "_");
+		
 		if (count($this->namespaces)) {
 			foreach ($this->namespaces as $namespace) {
-				if (strpos($classname, $namespace . "_") === 0) {
-					$file = 
-						"/" . trim($this->path, "/") . "/" 
-						. trim(str_replace("_", "/", $classname), "/") . ".php";
+				if (
+					strpos($classname, $namespace . "\\") === 0 
+					|| strpos($classname, $namespace . "_")
+				) {
+					$fileName  = '';
+					$namespace = '';
+					if (($lastNsPos = strripos($classname, '\\'))) {
+						$namespace = substr($classname, 0, $lastNsPos);
+						$classname = substr($classname, $lastNsPos + 1);
+						$fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+					}
+					$fileName .= str_replace('_', DIRECTORY_SEPARATOR, $classname) . '.php';
+					$file = "/" . trim($this->path, "/") . "/" . $fileName;
 					if (is_readable($file)) {
 						try {
 							include $file;

@@ -1,11 +1,10 @@
 <?php
 
-abstract class RRaven_Transform_Abstract {
+namespace RRaven;
+
+abstract class Transform_Abstract {
 	
-	abstract public function will_accept($input)
-	{
-		return false;
-	}
+	public function will_accept($input);
 	
 	abstract public function transform($input);
 	

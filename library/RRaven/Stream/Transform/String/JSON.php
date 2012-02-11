@@ -1,7 +1,11 @@
 <?php
 
-class RRaven_Stream_Transform_String_JSON 
-	extends RRaven_Stream_Transform_String_Abstract 
+namespace RRaven\Stream\Transform\String;
+
+use RRaven\Stream\Transform\String_Abstract;
+
+class JSON 
+	extends String_Abstract 
 {
 	public function current() {
 		return json_decode($this->get_reader()->current(), true);

@@ -1,6 +1,8 @@
 <?php
 
-class RRaven_Array_Toolbox {
+namespace RRaven\ArrayObject;
+
+class Toolbox {
 	
 	/**
 	 * Returns true if you can pass the variable to a foreach loop, or similar.
@@ -11,7 +13,7 @@ class RRaven_Array_Toolbox {
 	public static function isIterable($array) {
 		return 
 			is_array($array) 
-			|| $array instanceof Traversable;
+			|| $array instanceof \Traversable;
 	}
 	
 	/**
@@ -23,7 +25,7 @@ class RRaven_Array_Toolbox {
 	public static function isCountable($array) {
 		return 
 			is_array($array)
-			|| $array instanceof Countable;
+			|| $array instanceof \Countable;
 	}
 	
 	/**
@@ -37,7 +39,7 @@ class RRaven_Array_Toolbox {
 	public static function isArrayAccessible($array) {
 		return 
 			is_array($array) 
-			|| $array instanceof ArrayAccess;
+			|| $array instanceof \ArrayAccess;
 	}
 		
 	/**
@@ -50,7 +52,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function remove_duplicates($array) {
 		if (!self::isIterable($array)) {
-			throw new Exception("Can't loop over the variable given");
+			throw new \Exception("Can't loop over the variable given");
 		}
 		
 		$result = array();
@@ -75,7 +77,7 @@ class RRaven_Array_Toolbox {
 	public static function isArrayLike($array) {
 		return 
 			is_array($array)
-			|| $array instanceof ArrayObject
+			|| $array instanceof \ArrayObject
 			|| (
 				self::isIterable($array) 
 				&& self::isArrayAccessible($array) 
@@ -93,7 +95,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function combine($keys, $values) {
 		if (!self::isIterable($keys) || !self::isIterable($values)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		if (!self::isArrayAccessible($values)) {
 			$values = self::extractArrayFromIterable($values);
@@ -113,7 +115,7 @@ class RRaven_Array_Toolbox {
 	 */
 	private static function extractArrayFromIterable($array) {
 		if (!self::isIterable($array)) {
-			throw new Exception("Can't loop over the variable given");
+			throw new \Exception("Can't loop over the variable given");
 		}
 		$return = array();
 		foreach ($array as $k => $v) {
@@ -175,7 +177,7 @@ class RRaven_Array_Toolbox {
 		}
 		
 		$results = array();
-		foreach ($array as $index => $value) {
+		foreach ($array as $value) {
 			if (self::isArrayAccessible($value) && isset($value[$myKey])) {
 				$results[] = $value[$myKey];
 			} else {
@@ -199,12 +201,12 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function rotateArray($array) {
 		if (!self::isIterable($array)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		$result = array();
 		foreach ($array as $x => $row) {
 			if (!self::isIterable($row)) {
-				throw new Exception("Can't loop over a row inside the array");
+				throw new \Exception("Can't loop over a row inside the array");
 			}
 			foreach ($row as $y => $val) {
 				if (!isset($result[$y])) {
@@ -225,7 +227,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function xor_values($left, $right) {
 		if (!self::isIterable($left) || !self::isIterable($right)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		return 
 			self::and_not_values(
@@ -243,7 +245,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function xor_keys($left, $right) {
 		if (!self::isIterable($left) || !self::isIterable($right)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		return 
 			self::and_not_keys(
@@ -261,7 +263,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function and_not_keys($left, $right) {
 		if (!self::isIterable($left) || !self::isIterable($right)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		$known = array();
 		foreach ($right as $key => $val) {
@@ -287,7 +289,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function and_not_values($left, $right) {
 		if (!self::isIterable($left) || !self::isIterable($right)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		$known = array();
 		foreach ($right as $val) {
@@ -312,7 +314,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function and_values($left, $right) {
 		if (!self::isIterable($left) || !self::isIterable($right)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		$known = array();
 		foreach ($right as $val) {
@@ -337,7 +339,7 @@ class RRaven_Array_Toolbox {
 	 */
 	public static function and_keys($left, $right) {
 		if (!self::isIterable($left) || !self::isIterable($right)) {
-			throw new Exception("Can't loop over the variables given");
+			throw new \Exception("Can't loop over the variables given");
 		}
 		$known = array();
 		foreach ($right as $key => $val) {

@@ -1,7 +1,11 @@
 <?php
 
-class RRaven_Stream_Writer_HTTP 
-	extends RRaven_Stream_Writer_Abstract
+namespace RRaven\Stream\Writer;
+
+use RRaven\Stream\Writer_Abstract;
+
+class HTTP 
+	extends Writer_Abstract
 {
 	protected $_method = null;
 	protected $_handle = null;
@@ -67,7 +71,7 @@ class RRaven_Stream_Writer_HTTP
 	
 	/**
 	 * Returns the response body from the last request
-	 * @return type 
+	 * @return array 
 	 */
 	public function get_last_request()
 	{

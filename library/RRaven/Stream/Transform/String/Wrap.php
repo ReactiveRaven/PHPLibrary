@@ -1,14 +1,19 @@
 <?php
 
-class RRaven_Stream_Transform_String_Wrap 
-	extends RRaven_Stream_Transform_String_Abstract 
+namespace RRaven\Stream\Transform\String;
+
+use RRaven\Stream\Transform\String_Abstract;
+use RRaven\Stream\Reader_Abstract;
+
+class Wrap 
+	extends String_Abstract 
 {
 	protected $prefix = null;
 	protected $suffix = null;
 
 
 	public function __construct(
-		RRaven_Stream_Reader_Abstract $reader, 
+		Reader_Abstract $reader, 
 		$prefix = null, 
 		$suffix = null
 	) {

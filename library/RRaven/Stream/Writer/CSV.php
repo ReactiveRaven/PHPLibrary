@@ -1,6 +1,10 @@
 <?php
 
-class RRaven_Stream_Writer_CSV extends RRaven_Stream_Writer_File {
+namespace RRaven\Stream\Writer;
+
+use RRaven\Stream\Writer\File;
+
+class CSV extends File {
 	
 	protected $strict_key_matching = null;
 	
@@ -24,10 +28,10 @@ class RRaven_Stream_Writer_CSV extends RRaven_Stream_Writer_File {
 	
 	public function write_one($row) {
 		if (!$this->check_keys(array_keys($row))) {
-			throw new Exception("Keys given do not match header");
+			throw new \Exception("Keys given do not match header");
 		}
 		if ($this->closed) {
-			throw new Exception("Cannot write to CSV as already closed");
+			throw new \Exception("Cannot write to CSV as already closed");
 		}
 		fputcsv($this->handle, $row, $this->delimiter, $this->enclosure);
 	}

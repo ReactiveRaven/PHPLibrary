@@ -1,7 +1,11 @@
 <?php
 
-abstract class RRaven_Stream_Transform_Array_Abstract 
-	extends RRaven_Stream_Transform_Abstract 
+namespace RRaven\Stream\Transform;
+
+use RRaven\Stream\Transform_Abstract;
+
+abstract class Array_Abstract 
+	extends Transform_Abstract 
 {
 	
 }

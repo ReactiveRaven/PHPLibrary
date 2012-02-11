@@ -1,19 +1,24 @@
 <?php
 
-class RRaven_Stream_Transform_Array_Subkey 
-	extends RRaven_Stream_Transform_Array_Abstract 
+namespace RRaven\Stream\Transform;
+
+use RRaven\Stream\Reader_Abstract;
+use RRaven\Transform_Abstract;
+
+class Array_Subkey 
+	extends Array_Abstract 
 {
 	protected $transform = null;
 	protected $key = null;
 	
 	public function __construct(
-		RRaven_Stream_Reader_Abstract $reader, 
+		Reader_Abstract $reader, 
 		$key = null, 
-		RRaven_Transform_Abstract $transform = null
+		Transform_Abstract $transform = null
 	) {
 		parent::__construct($reader);
 		if ($key === null || $transform === null) {
-			throw new Exception(
+			throw new \Exception(
 				"Must supply both a key to change and a transform to apply"
 			);
 		}
@@ -21,7 +26,7 @@ class RRaven_Stream_Transform_Array_Subkey
 	
 	/**
 	 *
-	 * @return RRaven_Transform_Abstract
+	 * @return Transform_Abstract
 	 */
 	protected function get_transform()
 	{
@@ -34,7 +39,7 @@ class RRaven_Stream_Transform_Array_Subkey
 		if (
 			(
 				is_array($row) 
-				|| $row instanceof ArrayAccess
+				|| $row instanceof \ArrayAccess
 			) 
 			&& isset($row[$this->key])
 			&& $this->get_transform()->will_accept($row[$this->key])

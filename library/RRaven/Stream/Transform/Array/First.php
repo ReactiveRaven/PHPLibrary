@@ -1,12 +1,17 @@
 <?php
 
-class RRaven_Stream_Transform_Array_First 
-	extends RRaven_Stream_Transform_Array_Abstract 
+namespace RRaven\Stream\Transform;
+
+use RRaven\Stream\Reader_Abstract;
+use RRaven\Stream\Reader_Array;
+
+class Array_First 
+	extends Array_Abstract 
 {
 	
-	public function __construct(RRaven_Stream_Reader_Abstract $reader) {
+	public function __construct(Reader_Abstract $reader) {
 		$reader->rewind();
-		parent::__construct(new RRaven_Stream_Reader_Array($reader->current()));
+		parent::__construct(new Reader_Array($reader->current()));
 	}
 	
 	public function current() {

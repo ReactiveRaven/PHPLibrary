@@ -1,7 +1,12 @@
 <?php
 
-class RRaven_Debug_Snapshot_Exception_Listener_Forwarder
-	implements RRaven_Debug_Snapshot_Exception_Listener_Interface
+namespace RRaven\Debug\Snapshot\Exception\Listener;
+
+use RRaven\Debug\Snapshot\Exception as SnapshotException;
+use RRaven\Debug\Snapshot\Exception\Listener_Interface as SnapshotListenerInterface;
+
+class Forwarder
+	implements SnapshotListenerInterface
 {
 	protected $url = null;
 	
@@ -12,7 +17,7 @@ class RRaven_Debug_Snapshot_Exception_Listener_Forwarder
 		$this->url = $url;
 	}
 	
-	public function handleSnapshotException(RRaven_Debug_Snapshot_Exception $e)
+	public function handleSnapshotException(SnapshotException $e)
 	{
 		$json = json_encode($e->toArray());
 		try

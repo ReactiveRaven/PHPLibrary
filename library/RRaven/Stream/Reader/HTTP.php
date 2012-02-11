@@ -1,7 +1,11 @@
 <?php
 
-class RRaven_Stream_Reader_HTTP 
-	extends RRaven_Stream_Reader_Abstract 
+namespace RRaven\Stream\Reader;
+
+use RRaven\Stream\Reader_Abstract;
+
+class HTTP 
+	extends Reader_Abstract 
 {
 	
 	private $url = null;

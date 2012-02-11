@@ -1,13 +1,17 @@
 <?php
 
-class RRaven_Stream_Writer_Buffer extends RRaven_Stream_Writer_Abstract {
+namespace RRaven\Stream\Writer;
+
+use RRaven\Stream\Writer_Abstract;
+
+class Buffer extends Writer_Abstract {
 	
 	protected $writer = null;
 	protected $buffer = array();
 	
 	protected $closed = false;
 	
-	public function __construct(RRaven_Stream_Writer_Abstract $writer) {
+	public function __construct(Writer_Abstract $writer) {
 		$this->writer = $writer;
 	}
 	
@@ -18,7 +22,7 @@ class RRaven_Stream_Writer_Buffer extends RRaven_Stream_Writer_Abstract {
 	protected function flush() {
 		if (count($this->buffer)) {
 			if ($this->closed) {
-				throw new Exception(
+				throw new \Exception(
 					"Cannot flush buffer to stream_writer; already closed"
 				);
 			}

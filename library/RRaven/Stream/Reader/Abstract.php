@@ -1,6 +1,8 @@
 <?php
 
-abstract class RRaven_Stream_Reader_Abstract implements Iterator {
+namespace RRaven\Stream;
+
+abstract class Reader_Abstract implements \Iterator {
 
 	
 	public function toArray() {

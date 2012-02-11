@@ -1,6 +1,10 @@
 <?php
 
-interface RRaven_Debug_Snapshot_Exception_Listener_Interface
+namespace RRaven\Debug\Snapshot\Exception;
+
+use RRaven\Debug\Snapshot\Exception as SnapshotException;
+
+interface Listener_Interface
 {
-	public function handleSnapshotException(RRaven_Debug_Snapshot_Exception $e);
+	public function handleSnapshotException(SnapshotException $e);
 }

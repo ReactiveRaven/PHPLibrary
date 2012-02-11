@@ -1,6 +1,11 @@
 <?php
 
-class RRaven_Debug_Snapshot_Exception_Handler
+namespace RRaven\Debug\Snapshot\Exception;
+
+use RRaven\Debug\Snapshot\Exception\Listener_Interface as SnapshotListenerInterface;
+use RRaven\Debug\Snapshot\Exception as SnapshotException;
+
+class Handler
 {
 	protected $previousHandler = null;
 	protected $listeners = array();
@@ -12,14 +17,14 @@ class RRaven_Debug_Snapshot_Exception_Handler
 	}
 	
 	public function addSnapshotListener(
-		RRaven_Debug_Snapshot_Exception_Listener_Interface $listener
+		SnapshotListenerInterface $listener
 	)
 	{
 		$this->listeners[] = $listener;
 	}
 	
 	public function removeSnapshotListener(
-		RRaven_Debug_Snapshot_Exception_Listener_Interface $listener
+		SnapshotListenerInterface $listener
 	)
 	{
 		while (($key = array_search($listener, $this->listeners)) !== false)
@@ -29,10 +34,10 @@ class RRaven_Debug_Snapshot_Exception_Handler
 	}
 	
 	public function exception(Exception $exception) {
-		$snapshot = new RRaven_Debug_Snapshot_Exception($exception);
+		$snapshot = new SnapshotException($exception);
 		foreach (
 			$this->listeners 
-			as /* @var $listener RRaven_Debug_Snapshot_Exception_Listener_Interface */ $listener
+			as /* @var $listener SnapshotListenerInterface */ $listener
 		)
 		{
 			$listener->handleSnapshotException($snapshot);

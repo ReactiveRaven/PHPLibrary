@@ -1,6 +1,10 @@
 <?php
 
-class RRaven_Stream_Writer_File extends RRaven_Stream_Writer_Abstract {
+namespace RRaven\Stream\Writer;
+
+use RRaven\Stream\Writer_Abstract;
+
+class File extends Writer_Abstract {
 	
 	protected $handle = null;
 	protected $closed = false;
@@ -13,14 +17,14 @@ class RRaven_Stream_Writer_File extends RRaven_Stream_Writer_Abstract {
 			)
 			|| !is_writable(dirname($filename))
 		) {
-			throw new Exception("File or folder is not writable");
+			throw new \Exception("File or folder is not writable");
 		}
 		$this->handle = fopen($filename, "w");
 	}
 	
 	public function write_one($string) {
 		if ($this->closed) {
-			throw new Exception("Cannot write to file as already closed");
+			throw new \Exception("Cannot write to file as already closed");
 		}
 		fwrite($this->handle, $string);
 	}

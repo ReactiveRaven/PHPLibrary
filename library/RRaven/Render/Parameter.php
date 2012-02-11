@@ -1,6 +1,8 @@
 <?php
 
-class RRaven_Render_Parameter
+namespace RRaven\Render;
+
+class Parameter
 {
 	private $variable = null;
 	private $label = null;

@@ -1,11 +1,13 @@
 <?php
 
-abstract class RRaven_Stream_Writer_Abstract {
+namespace RRaven\Stream;
+
+abstract class Writer_Abstract {
 	
 	/**
 	 * Takes a collection of rows to write
 	 *
-	 * @param array|traversable $multiple_rows 
+	 * @param array|\Traversable $multiple_rows 
 	 */
 	public function write_many($multiple_rows) {
 		foreach ($multiple_rows as $row) {
@@ -17,7 +19,7 @@ abstract class RRaven_Stream_Writer_Abstract {
 	 * Takes a single row to write.
 	 * 
 	 * @param mixed $row
-	 * @throws Exception when writer is already closed
+	 * @throws \Exception when writer is already closed
 	 */
 	abstract public function write_one($row);
 	
