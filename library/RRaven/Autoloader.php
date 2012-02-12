@@ -1,6 +1,7 @@
 <?php
+namespace RRaven;
 
-class RRaven_Autoloader {
+class Autoloader {
 	
 	protected $namespaces = null;
 	protected $path = null;
